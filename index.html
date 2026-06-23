@@ -89,6 +89,21 @@
     padding:8px 0;box-shadow:0 6px 16px rgba(0,0,0,.35);
   }
   @media (max-width:560px){.ribbon{width:130px;height:130px}.ribbon span{top:28px;right:-54px;width:200px;font-size:11px}}
+  .waitlist{
+    display:flex;flex-wrap:wrap;gap:10px;align-items:center;width:min(100%,620px);
+    margin:0 0 10px;
+  }
+  .waitlist input[type="email"], .waitlist input[type="text"]{
+    min-width:min(100%,260px);flex:1 1 220px;border:1px solid var(--line);border-radius:999px;
+    background:rgba(255,255,255,.04);color:var(--ink);padding:13px 16px;
+    font:15px Arial,Helvetica,sans-serif;outline:none;
+  }
+  .waitlist input::placeholder{color:rgba(182,168,136,.72)}
+  .waitlist input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(199,154,63,.14)}
+  .waitlist .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .waitlist-status{flex-basis:100%;min-height:22px;color:var(--muted);font:14px Arial,Helvetica,sans-serif}
+  .waitlist-status.ok{color:var(--gold-soft)}
+  .waitlist-status.err{color:#e8a58f}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;opacity:1!important}}
 </style>
@@ -105,8 +120,17 @@
 
     <div class="cta">
       <a class="btn primary" href="https://torahlab.net">Explore TorahLab now →</a>
-      <a class="btn ghost" href="mailto:steve@aicoolschool.com?subject=Notify%20me%20when%20YeshivaLab%20launches">Get notified at launch</a>
+      <a class="btn ghost" href="mailto:steve@aicoolschool.com?subject=Notify%20me%20when%20YeshivaLab%20launches">Email us directly</a>
     </div>
+
+    <form class="waitlist" id="waitlist" action="mailto:steve@aicoolschool.com" method="post" enctype="text/plain">
+      <label class="hp" for="website">Website</label>
+      <input class="hp" id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      <input id="waitlist-email" name="email" type="email" placeholder="Email for launch notice" autocomplete="email" required />
+      <input id="waitlist-name" name="name" type="text" placeholder="Name (optional)" autocomplete="name" />
+      <button class="btn ghost" type="submit">Get notified at launch</button>
+      <div class="waitlist-status" id="waitlist-status" role="status" aria-live="polite"></div>
+    </form>
 
     <section class="grid" aria-label="What's coming">
       <div class="card"><span class="ic">📖</span><h3>Bilingual Tanach Reader</h3><p>Book → chapter → verse, Hebrew and English side by side, with every commentary one click away.</p></div>
@@ -123,6 +147,48 @@
       <span>© <span id="y"></span> AI Cool LLC · <a href="https://torahlab.net">torahlab.net</a></span>
     </footer>
   </main>
-  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    const waitlistForm = document.getElementById('waitlist');
+    const waitlistStatus = document.getElementById('waitlist-status');
+
+    function setWaitlistStatus(message, kind) {
+      waitlistStatus.textContent = message || '';
+      waitlistStatus.className = 'waitlist-status' + (kind ? ' ' + kind : '');
+    }
+
+    function mailtoFallback(email) {
+      const subject = encodeURIComponent('Notify me when YeshivaLab launches');
+      const body = encodeURIComponent('Please add me to the YeshivaLab launch list.\n\nEmail: ' + email);
+      window.location.href = 'mailto:steve@aicoolschool.com?subject=' + subject + '&body=' + body;
+    }
+
+    waitlistForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const form = new FormData(waitlistForm);
+      const email = String(form.get('email') || '').trim();
+      const name = String(form.get('name') || '').trim();
+      const website = String(form.get('website') || '').trim();
+
+      if (!email || !waitlistForm.reportValidity()) return;
+      setWaitlistStatus('Adding you to the launch list…');
+
+      try {
+        const response = await fetch('/api/notify', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ email, name, website }),
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.ok) throw new Error(data.error || 'Waitlist endpoint is not ready yet.');
+        waitlistForm.reset();
+        setWaitlistStatus(data.message || 'You’re on the YeshivaLab launch list.', 'ok');
+      } catch (err) {
+        setWaitlistStatus('The automatic signup is not ready yet — opening email instead.', 'err');
+        mailtoFallback(email);
+      }
+    });
+  </script>
 </body>
 </html>
