@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>YeshivaLab — coming soon</title>
+<meta name="description" content="The whole Tanach — read it, search it by meaning, and learn it with a chavrusa. From the makers of TorahLab." />
+<style>
+  :root{
+    --bg:#14110c; --bg2:#1c1810; --ink:#efe7d4; --muted:#b6a888;
+    --gold:#c79a3f; --gold-soft:#e3c178; --line:#352c1e; --card:#1b160f;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(199,154,63,.16), transparent 60%),
+      radial-gradient(900px 500px at 90% 110%, rgba(199,154,63,.08), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    font-family:Georgia,"Times New Roman",serif;
+    line-height:1.6; min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(20px,5vw,40px)}
+  .kicker{
+    display:inline-block;letter-spacing:.22em;text-transform:uppercase;
+    font-size:12px;color:var(--gold-soft);font-family:Arial,Helvetica,sans-serif;
+    border:1px solid var(--line);border-radius:999px;padding:6px 14px;margin-bottom:26px;
+    opacity:0;animation:rise .8s ease .05s forwards;
+  }
+  .he{font-size:clamp(20px,3.4vw,30px);color:var(--gold-soft);letter-spacing:.04em;margin:0 0 6px;opacity:0;animation:rise .8s ease .1s forwards}
+  h1{
+    font-size:clamp(46px,10vw,104px);line-height:.98;margin:0 0 18px;font-weight:400;
+    letter-spacing:-.01em;opacity:0;animation:rise .9s ease .15s forwards;
+  }
+  h1 .lab{
+    background:linear-gradient(180deg,var(--gold-soft),var(--gold));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lede{font-size:clamp(18px,2.4vw,23px);color:var(--ink);max-width:34ch;margin:0 0 12px;opacity:0;animation:rise .9s ease .25s forwards}
+  .sub{color:var(--muted);max-width:52ch;margin:0 0 34px;opacity:0;animation:rise .9s ease .32s forwards}
+  .cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:64px;opacity:0;animation:rise .9s ease .4s forwards}
+  .btn{
+    font-family:Arial,Helvetica,sans-serif;font-size:15px;text-decoration:none;
+    padding:13px 22px;border-radius:999px;display:inline-flex;align-items:center;gap:9px;transition:.18s;
+  }
+  .btn.primary{background:linear-gradient(180deg,var(--gold-soft),var(--gold));color:#241a06;font-weight:700;border:1px solid var(--gold)}
+  .btn.primary:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  .btn.ghost{color:var(--ink);border:1px solid var(--line);background:rgba(255,255,255,.02)}
+  .btn.ghost:hover{border-color:var(--gold);color:var(--gold-soft)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-bottom:60px}
+  .card{
+    background:linear-gradient(180deg,var(--card),#171109);
+    border:1px solid var(--line);border-radius:16px;padding:22px 20px;
+    opacity:0;animation:rise .8s ease forwards;
+  }
+  .card:nth-child(1){animation-delay:.46s}.card:nth-child(2){animation-delay:.52s}
+  .card:nth-child(3){animation-delay:.58s}.card:nth-child(4){animation-delay:.64s}
+  .card:nth-child(5){animation-delay:.70s}.card:nth-child(6){animation-delay:.76s}
+  .card:nth-child(7){animation-delay:.82s}
+  .card .ic{font-size:22px;margin-bottom:10px;display:block}
+  .card h3{margin:0 0 6px;font-size:19px;font-weight:400;color:var(--gold-soft)}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+  .soon{display:inline-block;margin-left:8px;font-family:Arial,sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line);border-radius:6px;padding:2px 7px;vertical-align:middle}
+  footer{border-top:1px solid var(--line);padding-top:26px;color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;justify-content:space-between}
+  footer a{color:var(--gold-soft);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .fam{font-family:Arial,sans-serif;font-size:13px;letter-spacing:.04em}
+  /* Hero "Coming Soon" badge */
+  .comingsoon{
+    display:inline-flex;align-items:center;gap:10px;margin:0 0 22px;
+    font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;
+    letter-spacing:.26em;text-transform:uppercase;color:#241a06;
+    background:linear-gradient(180deg,var(--gold-soft),var(--gold));
+    border:1px solid var(--gold);border-radius:999px;padding:9px 18px;
+    box-shadow:0 10px 30px rgba(199,154,63,.22);
+    opacity:0;animation:rise .9s ease .2s forwards;
+  }
+  .comingsoon .dot{width:9px;height:9px;border-radius:50%;background:#241a06;animation:pulse 1.8s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(.7);opacity:.5}50%{transform:scale(1.15);opacity:1}}
+  /* Corner ribbon sign */
+  .ribbon{position:fixed;top:0;right:0;width:170px;height:170px;overflow:hidden;pointer-events:none;z-index:5}
+  .ribbon span{
+    position:absolute;top:34px;right:-46px;transform:rotate(45deg);
+    width:210px;text-align:center;font-family:Arial,Helvetica,sans-serif;
+    font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#241a06;
+    background:linear-gradient(180deg,var(--gold-soft),var(--gold));
+    padding:8px 0;box-shadow:0 6px 16px rgba(0,0,0,.35);
+  }
+  @media (max-width:560px){.ribbon{width:130px;height:130px}.ribbon span{top:28px;right:-54px;width:200px;font-size:11px}}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;opacity:1!important}}
+</style>
+</head>
+<body>
+  <div class="ribbon"><span>Coming Soon</span></div>
+  <main class="wrap">
+    <span class="kicker">Part of the TorahLab family</span>
+    <p class="he">בית מדרש</p>
+    <h1>Yeshiva<span class="lab">Lab</span></h1>
+    <div class="comingsoon"><span class="dot"></span>Coming Soon</div>
+    <p class="lede">The whole Tanach — read it, search it by meaning, learn it with a chavrusa.</p>
+    <p class="sub">A complete beis medrash on the web: every pasuk in Hebrew and English, every commentary at your fingertips, and AI that helps you find and understand — always citing its sources, never inventing them.</p>
+
+    <div class="cta">
+      <a class="btn primary" href="https://torahlab.net">Explore TorahLab now →</a>
+      <a class="btn ghost" href="mailto:steve@aicoolschool.com?subject=Notify%20me%20when%20YeshivaLab%20launches">Get notified at launch</a>
+    </div>
+
+    <section class="grid" aria-label="What's coming">
+      <div class="card"><span class="ic">📖</span><h3>Bilingual Tanach Reader</h3><p>Book → chapter → verse, Hebrew and English side by side, with every commentary one click away.</p></div>
+      <div class="card"><span class="ic">✨</span><h3>Vibe Pasuk Finder</h3><p>Describe a scene, idea, or event in plain English — and find the verse by meaning, not just by words.</p></div>
+      <div class="card"><span class="ic">🔎</span><h3>Search Across All of Tanach <span class="soon">soon</span></h3><p>Trace a person, topic, or event as it echoes from book to book — meaning-aware, sourced, and linkable.</p></div>
+      <div class="card"><span class="ic">⚖️</span><h3>Compare the Commentators</h3><p>One verse, one question — Rashi, Ramban, Ibn Ezra and more, side by side, with where they agree and split.</p></div>
+      <div class="card"><span class="ic">🤝</span><h3>AI Chavrusa <span class="soon">soon</span></h3><p>A study partner that asks you questions, surfaces the machlokes, and walks you through the difficulty.</p></div>
+      <div class="card"><span class="ic">🎙️</span><h3>Podcast Studio <span class="soon">soon</span></h3><p>Turn your sources and notes into a Dvar Torah — record it, produce it, and share it or publish it to the world.</p></div>
+      <div class="card"><span class="ic">🗂️</span><h3>Your Beis Medrash</h3><p>Save notes, highlights, and collections; build projects from your sources and take them with you.</p></div>
+    </section>
+
+    <footer>
+      <span class="fam">YeshivaLab — the learning home of the TorahLab family.</span>
+      <span>© <span id="y"></span> AI Cool LLC · <a href="https://torahlab.net">torahlab.net</a></span>
+    </footer>
+  </main>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Cloudflare / Wrangler local state
+.wrangler/
+
+# editors
+.idea
+.vscode
+
+# node (if this grows into a built app later)
+/node_modules
+/.next/
+/out/
