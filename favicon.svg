@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">YeshivaLab</title>
+  <desc id="desc">The whole Tanach — read it, search it by meaning, learn it with a chavrusa.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="18%" r="78%">
+      <stop offset="0%" stop-color="#3a2b13"/>
+      <stop offset="62%" stop-color="#1c1810"/>
+      <stop offset="100%" stop-color="#14110c"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#e3c178"/>
+      <stop offset="100%" stop-color="#c79a3f"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#000" flood-opacity="0.38"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <rect x="28" y="28" width="456" height="456" rx="72" fill="none" stroke="#352c1e" stroke-width="8"/>
+  <text x="256" y="105" text-anchor="middle" fill="#e3c178" font-size="34" letter-spacing="2" font-family="Georgia, 'Times New Roman', serif">בית מדרש</text>
+  <g filter="url(#shadow)">
+    <text x="256" y="224" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="72" fill="#efe7d4">Yeshiva</text>
+    <text x="256" y="296" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="72" fill="url(#gold)">Lab</text>
+  </g>
+  <text x="256" y="355" text-anchor="middle" fill="#b6a888" font-size="22" font-family="Arial, Helvetica, sans-serif">The whole Tanach — read it,</text>
+  <text x="256" y="385" text-anchor="middle" fill="#b6a888" font-size="22" font-family="Arial, Helvetica, sans-serif">search it by meaning, learn it</text>
+  <text x="256" y="415" text-anchor="middle" fill="#b6a888" font-size="22" font-family="Arial, Helvetica, sans-serif">with a chavrusa.</text>
+  <circle cx="256" cy="455" r="4" fill="#c79a3f"/>
+</svg>
