@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
   <title id="title">YeshivaLab</title>
-  <desc id="desc">The whole Tanach — read it, search it by meaning, learn it with a chavrusa.</desc>
+  <desc id="desc">Shas, Tanach &amp; Commentaries. Learn It, Vibe Search It, Bring a Chabura.</desc>
   <defs>
     <radialGradient id="bg" cx="50%" cy="18%" r="78%">
       <stop offset="0%" stop-color="#3a2b13"/>
@@ -22,8 +22,8 @@
     <text x="256" y="224" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="72" fill="#efe7d4">Yeshiva</text>
     <text x="256" y="296" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="72" fill="url(#gold)">Lab</text>
   </g>
-  <text x="256" y="355" text-anchor="middle" fill="#b6a888" font-size="22" font-family="Arial, Helvetica, sans-serif">The whole Tanach — read it,</text>
-  <text x="256" y="385" text-anchor="middle" fill="#b6a888" font-size="22" font-family="Arial, Helvetica, sans-serif">search it by meaning, learn it</text>
-  <text x="256" y="415" text-anchor="middle" fill="#b6a888" font-size="22" font-family="Arial, Helvetica, sans-serif">with a chavrusa.</text>
+  <text x="256" y="350" text-anchor="middle" fill="#b6a888" font-size="21" font-family="Arial, Helvetica, sans-serif">Shas, Tanach &amp; Commentaries.</text>
+  <text x="256" y="380" text-anchor="middle" fill="#b6a888" font-size="21" font-family="Arial, Helvetica, sans-serif">Learn It, Vibe Search It,</text>
+  <text x="256" y="410" text-anchor="middle" fill="#b6a888" font-size="21" font-family="Arial, Helvetica, sans-serif">Bring a Chabura.</text>
   <circle cx="256" cy="455" r="4" fill="#c79a3f"/>
 </svg>
